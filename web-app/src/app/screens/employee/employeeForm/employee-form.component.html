@@ -1,0 +1,84 @@
+<div class="container p-8 mx-auto">
+    <h1 class="text-2xl font-bold text-center">{{isEditMode ? 'Update Employee ' : 'Add new Employee'}} </h1>
+    <mat-card>
+        <div class="p-8">
+            <mat-card-title>
+                <div class="flex justify-between items-center">
+                    <span class="text-lg font-semibold">{{isEditMode ? 'Update Employee details.' : 'Add new Employee'}}</span>
+                </div>
+            </mat-card-title>
+            <mat-card-subtitle>
+                <p>Welcome. Please fill the employee details to proceed.</p><br>
+                <!-- Employee Form -->
+                <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+                    <div class="pad-t-xs">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            @for (item of arrformfieldConfig; track $index) {
+                                <!-- Select Field -->
+                                @if (item.type === 'select') {
+                                    <mat-form-field class="w-full">
+                                        <mat-label>{{item.label}}</mat-label>
+                                        <mat-select [formControlName]="item.name">
+                                            @for (option of item.options; track $index) {
+                                                <mat-option [value]="option.id">{{option.name}}</mat-option>
+                                            }
+                                        </mat-select>
+                                        @if (item.vaidations) {
+                                            <mat-error>
+                                                @for (validation of item.vaidations; track $index) {
+                                                    {{validation}}
+                                                }
+                                            </mat-error>
+                                        }
+                                    </mat-form-field>
+                                } 
+                                <!-- Date Field -->
+                                @else if (item.type === 'date') {
+                                    <mat-form-field class="w-full">
+                                        <mat-label>{{item.label}}</mat-label>
+                                        <input matInput [matDatepicker]="picker" [formControlName]="item.name" [placeholder]="item.placeholder">
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker">
+                                            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                        @if (item.vaidations) {
+                                            <mat-error>
+                                                @for (validation of item.vaidations; track $index) {
+                                                    {{validation}}
+                                                }
+                                            </mat-error>
+                                        }
+                                    </mat-form-field>
+                                } 
+                                <!-- Text/Input Field -->
+                                @else {
+                                    <mat-form-field class="w-full">
+                                        <mat-label>{{item.label}}</mat-label>
+                                        <input matInput [formControlName]="item.name" [placeholder]="item.placeholder" [type]="item.type"/>
+                                        @if (item.vaidations) {
+                                            <mat-error>
+                                                @for (validation of item.vaidations; track $index) {
+                                                    {{validation}}
+                                                }
+                                            </mat-error>
+                                        }
+                                    </mat-form-field>
+                                }
+                            }
+                        </div>
+                        <div class="flex justify-end gap-4 mt-4">
+                            <button mat-button type="button" (click)="onCancel()">Cancel</button>
+                            <button mat-button type="submit" [disabled]="!employeeForm.valid">
+                                @if (isEditMode) {
+                                Update
+                                } @else {
+                                Submit
+                                }
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-subtitle>
+        </div>
+    </mat-card>
+</div>

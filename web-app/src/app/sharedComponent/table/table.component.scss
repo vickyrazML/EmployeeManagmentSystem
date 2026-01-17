@@ -1,0 +1,39 @@
+.example-container {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+  border: 1px solid #737171;
+  border-collapse: collapse;
+  table-layout: fixed;
+
+  th {
+        font-size: large;
+        font-weight: bold;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f2f2f2;
+        justify-items: center;
+    }
+    
+    th, td {
+        border: 1px solid #737171;
+        padding-left: 20px;
+        overflow: hidden;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .mat-row {
+        height: 30px;
+    }
+}
+.mdc-data-table__cell {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 10px !important;
+}
+button {
+    margin-right: 0.5rem;
+    
+}
+

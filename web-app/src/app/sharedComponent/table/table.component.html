@@ -1,0 +1,28 @@
+<section class="example-container mat-elevation-z8" tabindex="0">
+  <table mat-table [dataSource]="dataSource">
+
+    @for (item of columns; track $index) {
+        @if (item.id == 'Action') {
+            <ng-container [matColumnDef]="item.id">
+                <th mat-header-cell *matHeaderCellDef> {{item.name}} </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-raised-button (click)="onEdit(element)" title="Edit">Edit</button>
+                    <button mat-raised-button (click)="onDelete(element)" title="Delete">Delete</button>
+                </td>
+            </ng-container>
+        } @else {
+            <ng-container [matColumnDef]="item.id">
+                <th mat-header-cell *matHeaderCellDef> {{item.name}} </th>
+                <td mat-cell *matCellDef="let element"> {{element[item.id]}} </td>
+            </ng-container>
+        }
+    }
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" [attr.colspan]="displayedColumns.length">No data matching the filter.</td>
+    </tr>
+  </table>
+</section>
+

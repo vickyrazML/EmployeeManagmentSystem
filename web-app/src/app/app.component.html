@@ -1,0 +1,46 @@
+<header class="sticky top-0 z-10">
+  <mat-toolbar class="bg-blue-400! flex justify-between">
+    <button matIconButton class="example-icon text-white!" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="title text-white!">{{title}}</span>
+    <span class="example-spacer"></span>
+    <button matIconButton class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </mat-toolbar>
+</header>
+<mat-drawer-container class="h-[calc(100vh-64px)]">
+  <mat-drawer #drawer class="w-[250px] shadow-lg bg-white!" [mode]="'side'" [opened]="true">
+    <nav>
+      <ul class="flex flex-col p-4 gap-4">
+        <li>
+          <button routerLink="/" mat-button class="w-full text-left" >
+            <mat-icon class="mr-2">dashboard</mat-icon>
+            Dashboard
+          </button>
+        </li>
+        <li>
+          <button routerLink="/departments" mat-button class="w-full text-left" >
+            <mat-icon class="mr-2">people</mat-icon>
+            Departments
+          </button>
+        </li>
+        <li>
+          <button routerLink="/employees" mat-button class="w-full text-left">
+            <mat-icon class="mr-2">people</mat-icon>
+            Employees-home
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+  </mat-drawer>
+  <mat-drawer-content>
+    <main class="min-h-screen bg-grey-300!">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+<footer></footer>
